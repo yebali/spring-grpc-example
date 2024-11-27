@@ -11,6 +11,10 @@ spring:
     hibernate:
       ddl-auto: create
 
+grpc:
+  server:
+    port: 9091
+
 # actuator
 management:
   server:

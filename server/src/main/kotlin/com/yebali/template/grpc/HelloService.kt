@@ -1,13 +1,17 @@
 package com.yebali.template.grpc
 
-import com.yebali.template.grpc.HelloProto.HelloResponse
+import io.grpc.stub.StreamObserver
 import net.devh.boot.grpc.server.service.GrpcService
 
 @GrpcService
-class HelloService : HelloServiceGrpcKt.HelloServiceCoroutineImplBase() {
-    override suspend fun sayHello(request: HelloProto.HelloRequest): HelloResponse {
-        return HelloResponse.newBuilder()
-            .setMessage("Hello ${request.name}")
-            .build()
+class HelloService : HelloServiceGrpc.HelloServiceImplBase() {
+    override fun sayHello(request: HelloRequest, responseObserver: StreamObserver<HelloResponse>) {
+        responseObserver.onNext(
+            HelloResponse.newBuilder()
+                .setMessage("hello ${request.name}")
+                .build(),
+        )
+
+        responseObserver.onCompleted()
     }
 }

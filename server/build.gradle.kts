@@ -34,15 +34,11 @@ protobuf {
         create("grpc") {
             artifact = "io.grpc:protoc-gen-grpc-java:1.57.2"
         }
-        create("grpckt") {
-            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.4.1:jdk8@jar"
-        }
     }
     generateProtoTasks {
         all().forEach { task ->
             task.plugins {
                 create("grpc")
-                create("grpckt")
             }
         }
     }
